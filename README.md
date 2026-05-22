@@ -1,126 +1,224 @@
-# CampusConnect
+# CampusConnect Big Data Analytics Platform
 
-CampusConnect is a campus feed and placement management app built for students, club admins, DA placement officers, and super admins.
+A full-stack MERN-based campus management and analytics platform integrated with Apache Spark and Streamlit for real-time student and placement analytics.
 
-## Features
+---
 
-- Student feed for campus posts, club events, workshops, announcements, placements, and internships.
-- Student placement opt-in and event registration flow.
-- Club admin profile page with club-wise uploaded posts.
-- DA officer profile page with placement and internship posts.
-- Role-based navigation for students, clubs, DA officers, and super admins.
-- Super admin dashboard with student, club, DA, and combined analytics.
-- MongoDB-backed authentication, posts, registrations, drives, and analytics.
+# 🚀 Features
 
-## Tech Stack
+- 👨‍🎓 Student & Admin Dashboard
+- 📢 Event and Placement Notifications
+- 📝 Post Creation & Feed System
+- 📊 Analytics Dashboard using Streamlit
+- ⚡ Apache Spark Integration for Big Data Processing
+- 📈 Department-wise & Role-wise Analysis
+- 🔐 Authentication & Role Management
+- 🎨 Modern UI with Tailwind CSS + ShadCN UI
 
-- React
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- React.js
 - TypeScript
-- Vite
 - Tailwind CSS
-- shadcn/ui
-- Express
+- ShadCN UI
+- Vite
+
+## Backend
+- Node.js
+- Express.js
 - MongoDB
 
-## Roles
+## Big Data & Analytics
+- Apache Spark
+- Python
+- Streamlit
+- Pandas
 
-- `student`: Can view feed, placements, notifications, and register/apply.
-- `club-admin`: Can create club posts and view club profile, registrations, and analytics.
-- `da-officer`: Can create placement/internship posts and view DA profile, registrations, and analytics.
-- `super-admin`: Can view dashboard, student analytics, club analytics, and DA analytics.
+---
 
-## Setup
+# 🏗️ System Architecture
 
-Install dependencies:
+```text
+                           ┌────────────────────┐
+                           │      Users         │
+                           │ Students / Admins  │
+                           └─────────┬──────────┘
+                                     │
+                                     ▼
+                    ┌────────────────────────────────┐
+                    │        React Frontend          │
+                    │  (Vite + Tailwind + TS)        │
+                    └────────────────┬───────────────┘
+                                     │ API Requests
+                                     ▼
+                    ┌────────────────────────────────┐
+                    │       Node.js + Express        │
+                    │         Backend Server         │
+                    └────────────────┬───────────────┘
+                                     │
+                     ┌───────────────┴───────────────┐
+                     ▼                               ▼
+        ┌──────────────────────┐       ┌─────────────────────────┐
+        │      MongoDB         │       │   Apache Spark Engine   │
+        │ User & App Data      │       │ Big Data Processing     │
+        └──────────────────────┘       └─────────────┬───────────┘
+                                                      │
+                                                      ▼
+                                   ┌────────────────────────────┐
+                                   │ Streamlit Analytics Panel  │
+                                   │  Graphs & Visual Insights  │
+                                   └────────────────────────────┘
+```
 
-```cmd
+---
+
+# 📂 Project Structure
+
+```bash
+CampusConnect-bigdata/
+│
+├── public/                     # Static assets
+│
+├── server/
+│   ├── analytics/
+│   │   ├── analytics-data/     # CSV datasets
+│   │   ├── analytics-output/   # Generated analytics results
+│   │   ├── analytics.py        # Spark analytics processing
+│   │   └── dashboard.py        # Streamlit dashboard
+│   │
+│   ├── routes/
+│   ├── db.js
+│   └── index.js
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── contexts/
+│   ├── hooks/
+│   └── lib/
+│
+├── package.json
+└── README.md
+```
+
+---
+
+# ⚙️ Installation
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Ruba2911/CampusConnect-bigdata.git
+cd CampusConnect-bigdata
+```
+
+---
+
+# 📦 Install Dependencies
+
+## Frontend
+
+```bash
 npm install
 ```
 
-Create a local `.env` file from `.env.example`:
+## Backend
 
-```cmd
-copy .env.example .env
+```bash
+cd server
+npm install
 ```
 
-Default local MongoDB settings:
+## Python Dependencies
 
-```env
-MONGODB_URI=mongodb://localhost:27017/campusconnect
-MONGODB_DB_NAME=campusconnect
-PORT=4000
-CLIENT_URL=http://localhost:8080,http://localhost:5173
-VITE_API_URL=http://localhost:4000
+```bash
+pip install pyspark streamlit pandas
 ```
 
-Make sure MongoDB is running locally or update `MONGODB_URI` with your MongoDB Atlas connection string.
+---
 
-## Run Locally
+# 🔥 Running the Project
 
-Start the backend server:
+## Start Frontend
 
-```cmd
-cd "C:\Users\RUBADEVI\Downloads\studentnexus-feed-main (2)\studentnexus-feed-main"
-npm run server
-```
-
-Start the frontend in another terminal:
-
-```cmd
-cd "C:\Users\RUBADEVI\Downloads\studentnexus-feed-main (2)\studentnexus-feed-main"
+```bash
 npm run dev
 ```
 
-Default URLs:
+---
 
-- Frontend: `http://localhost:8080`
-- Backend: `http://localhost:4000`
-- Health check: `http://localhost:4000/api/health`
+## Start Backend
 
-## Default Super Admin
-
-The backend creates this account automatically if it does not exist:
-
-```txt
-Email: admin@gmail.com
-Password: admin123
-Role: super-admin
+```bash
+cd server
+node index.js
 ```
 
-## Useful Commands
+---
 
-Build the frontend:
+## Start Streamlit Dashboard
 
-```cmd
-npm run build
+```bash
+streamlit run server/analytics/dashboard.py
 ```
 
-Run tests:
+---
 
-```cmd
-npm run test
+# 📊 Big Data Analytics
+
+The project uses Apache Spark to process and analyze student engagement and placement-related datasets.
+
+## Analytics Included
+
+- Department-wise student analysis
+- Role distribution analysis
+- User activity insights
+- Placement analytics visualization
+
+Generated results are stored in:
+
+```bash
+server/analytics/analytics-output/
 ```
 
-Run lint:
+---
 
-```cmd
-npm run lint
-```
+# 🧠 Spark Workflow
 
-## API Overview
+1. Load CSV dataset
+2. Process data using PySpark
+3. Generate analytics reports
+4. Store JSON outputs
+5. Visualize using Streamlit
 
-- `GET /api/health`
-- `POST /api/auth/login`
-- `POST /api/auth/signup`
-- `GET /api/posts`
-- `POST /api/posts`
-- `GET /api/drives`
-- `GET /api/analytics`
-- `GET /api/admin/analytics`
-- `GET /api/registrations`
-- `POST /api/registrations`
-- `DELETE /api/registrations`
+---
 
-## Notes
+# 🎯 Future Enhancements
 
-Existing records in MongoDB Compass remain until manually deleted from the database. The app no longer auto-seeds mock post or drive data.
+- Real-time analytics
+- AI-based placement prediction
+- Attendance analytics
+- Recommendation system
+- Cloud deployment using AWS/GCP
+
+---
+
+# 👩‍💻 Contributors
+
+- Sweda Keerthana
+- Ruba2911
+
+---
+
+# 📸 Screenshots
+
+Add project screenshots here.
+
+---
+
+# 📄 License
+
+This project is developed for educational and academic purposes.
